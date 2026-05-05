@@ -3,6 +3,10 @@ plugins {
     id("org.graalvm.buildtools.native") version "0.10.2"
 }
 
+group = "com.abraham_bankole"
+
+description = "sentry"
+
 repositories {
     mavenCentral()
 }
@@ -19,4 +23,24 @@ dependencies {
 
     // Local AI Bridge
     implementation("ai.koog:koog-provider-ollama:0.8.0")
+}
+
+spotless{
+    kotlin{
+        ktfmt("0.5.3").googleStyle()
+        trimTrailingWhitespace()
+        endWithNewLine()
+    }
+
+    kotlinGradle{
+        target("*.gradle.kts")
+        ktfmt("0.5.3").googleStyle()
+    }
+
+    format("misc"){
+        target("**/*.md", "**/.gitignore", "**/*.yml")
+        leadingTabsToSpaces()
+        trimTrailingWhitespace()
+        endWithNewLine()
+    }
 }
