@@ -1,22 +1,22 @@
 plugins {
-    kotlin("jvm") version "2.3.10"
+    kotlin("jvm") version "2.2.0"
+    id("org.graalvm.buildtools.native") version "0.10.2"
 }
-
-group = "com.abraham_bankole"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-}
+    // JetBrains Koog
+    implementation("ai.koog:koog-agents-jvm:0.8.0")
+    implementation("ai.koog:koog-strategy-graph:0.8.0")
+    implementation("ai.koog:koog-mcp:0.8.0") // For the "Agnostic" layer
 
-kotlin {
-    jvmToolchain(21)
-}
+    // Infra
+    implementation("org.apache.kafka:kafka-clients:3.8.0")
+    implementation("org.neo4j.driver:neo4j-java-driver:5.22.0") // Memgraph Bolt
 
-tasks.test {
-    useJUnitPlatform()
+    // Local AI Bridge
+    implementation("ai.koog:koog-provider-ollama:0.8.0")
 }
