@@ -1,10 +1,10 @@
 package com.abraham_bankole
 
 fun main() {
-    val name = "Kotlin"
-    println("Hello, " + name + "!")
+  val name = "Abraham Bankole"
+  println("Hello, " + name + "!")
 
-    for (i in 1..5) {
-        println("i = $i")
-    }
+  for (i in 1..5) {
+    println("i = $i")
+  }
 }
