@@ -35,11 +35,11 @@ dependencies {
 
 gradle.taskGraph.whenReady {
   allTasks.filterIsInstance<JavaExec>().forEach { task ->
-    if (task.executable.contains("<<target java executable path>>")) {
+    if (task.executable?.contains("<<target java executable path>>") == true) {
       val toolchains = project.extensions.getByType<JavaToolchainService>()
-      task.executable = toolchains.launcherFor {
+      task.setExecutable(toolchains.launcherFor {
         languageVersion.set(JavaLanguageVersion.of(21))
-      }.get().executablePath.asFile.absolutePath
+      }.get().executablePath.asFile.absolutePath)
     }
   }
 }
