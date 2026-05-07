@@ -9,13 +9,9 @@ plugins {
   application
 }
 
-application {
-  mainClass.set("com.abraham_bankole.MainKt")
-}
+application { mainClass.set("com.abraham_bankole.MainKt") }
 
-kotlin {
-  jvmToolchain(21)
-}
+kotlin { jvmToolchain(21) }
 
 repositories { mavenCentral() }
 
@@ -37,9 +33,14 @@ gradle.taskGraph.whenReady {
   allTasks.filterIsInstance<JavaExec>().forEach { task ->
     if (task.executable?.contains("<<target java executable path>>") == true) {
       val toolchains = project.extensions.getByType<JavaToolchainService>()
-      task.setExecutable(toolchains.launcherFor {
-        languageVersion.set(JavaLanguageVersion.of(21))
-      }.get().executablePath.asFile.absolutePath)
+      task.setExecutable(
+        toolchains
+          .launcherFor { languageVersion.set(JavaLanguageVersion.of(21)) }
+          .get()
+          .executablePath
+          .asFile
+          .absolutePath
+      )
     }
   }
 }
